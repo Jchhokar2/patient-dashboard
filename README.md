@@ -26,8 +26,9 @@ https://www.youtube.com/watch?v=KYDt0y2-zTM
 
 Create a `.env` file inside the `backend` folder and paste this exactly:
 
-    MONGODB_URI=mongodb+srv://jasrajchhokar2003_db_user:UXWPeIGm6mCOAwzR@cluster0.1nwaaso.mongodb.net/patient-dashboard?appName=Cluster0
-    PORT=3000
+    MONGODB_URI=your_mongodb_connection_string_here
+PORT=3000
+
 
 Start the backend:
 
@@ -69,5 +70,5 @@ Open your browser and go to `http://localhost:4200`
 ## Notes
 
 - The database is already seeded with 20 patients so you will see data right away
-- No need to create your own MongoDB account — the connection string above connects to my Atlas cluster
+- Create your own free MongoDB Atlas cluster at cloud.mongodb.com and paste your connection string into the .env file
 - Make sure both the backend and frontend are running at the same time
