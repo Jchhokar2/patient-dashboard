@@ -1,0 +1,46 @@
+<div class="container">
+  <p-toast />
+  <app-spinner *ngIf="loading()" />
+
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+    <button (click)="goBack()" style="background: none; border: none; cursor: pointer; font-size: 14px; color: #4f46e5;">← Back</button>
+    <h1 class="page-title" style="margin: 0;">Patient Detail</h1>
+  </div>
+
+  <div class="card" style="max-width: 600px;" *ngIf="patient()">
+    <div style="margin-bottom: 16px;">
+      <p style="color: #888; font-size: 13px;">Full Name</p>
+      <p style="font-size: 16px; font-weight: 500;">{{ patient()?.firstName }} {{ patient()?.lastName }}</p>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <p style="color: #888; font-size: 13px;">Email</p>
+      <p>{{ patient()?.email }}</p>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <p style="color: #888; font-size: 13px;">Date of Birth</p>
+      <p>{{ patient()?.dateOfBirth }}</p>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <p style="color: #888; font-size: 13px;">Registered Date</p>
+      <p>{{ patient()?.registeredDate | date:'mediumDate' }}</p>
+    </div>
+
+    <div style="margin-bottom: 24px;">
+      <p style="color: #888; font-size: 13px; margin-bottom: 8px;">Status</p>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <p-select
+          [options]="statusOptions"
+          [(ngModel)]="selectedStatus"
+          optionLabel="label"
+          optionValue="value"
+        />
+        <button class="btn-primary" (click)="updateStatus()">Update Status</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

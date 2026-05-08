@@ -1,0 +1,96 @@
+<div class="container">
+  <p-toast />
+  <app-spinner *ngIf="loading()" />
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h1 class="page-title">Patient Dashboard</h1>
+    <button class="btn-primary" (click)="goToAddPatient()">+ Add Patient</button>
+  </div>
+
+  <!-- Stats cards -->
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+    <div class="card" style="text-align: center;">
+      <p style="color: #888; font-size: 13px;">Total</p>
+      <h2>{{ stats().total }}</h2>
+    </div>
+    <div class="card" style="text-align: center;">
+      <p style="color: #065f46; font-size: 13px;">Active</p>
+      <h2>{{ stats().active }}</h2>
+    </div>
+    <div class="card" style="text-align: center;">
+      <p style="color: #854d0e; font-size: 13px;">Pending</p>
+      <h2>{{ stats().pending }}</h2>
+    </div>
+    <div class="card" style="text-align: center;">
+      <p style="color: #991b1b; font-size: 13px;">Inactive</p>
+      <h2>{{ stats().inactive }}</h2>
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <div class="card" style="margin-bottom: 24px;">
+    <p-chart type="pie" [data]="chartData()" [style]="{'width': '300px', 'margin': '0 auto'}" />
+  </div>
+
+  <!-- Filters -->
+  <div class="card">
+    <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+      <input
+        type="text"
+        placeholder="Search by name or email..."
+        [(ngModel)]="search"
+        (ngModelChange)="onSearch()"
+        style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; flex: 1; font-size: 14px;"
+      />
+      <p-select
+        [options]="statusOptions"
+        [(ngModel)]="statusFilter"
+        (ngModelChange)="onStatusChange()"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Filter by status"
+      />
+    </div>
+
+    <!-- Patient table -->
+    <p-table
+      [value]="patients()"
+      [paginator]="true"
+      [rows]="10"
+      [totalRecords]="totalRecords()"
+      [lazy]="true"
+      (onPage)="onPageChange($event)"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Page {currentPage} of {totalPages}"
+      [rowsPerPageOptions]="[]"
+      [showFirstLastIcon]="false"
+      [showJumpToPageDropdown]="false"
+      [showPageLinks]="false"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Registered Date</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-patient>
+        <tr>
+          <td>{{ patient.firstName }} {{ patient.lastName }}</td>
+          <td>{{ patient.email }}</td>
+          <td><app-status-badge [status]="patient.status" /></td>
+          <td>{{ patient.registeredDate | date:'mediumDate' }}</td>
+          <td>
+            <button class="btn-primary" (click)="goToDetail(patient._id)">View</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+
+
+

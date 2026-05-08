@@ -1,0 +1,77 @@
+<div class="container">
+  <p-toast />
+  <app-spinner *ngIf="loading()" />
+
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+    <button (click)="goBack()" style="background: none; border: none; cursor: pointer; font-size: 14px; color: #4f46e5;">← Back</button>
+    <h1 class="page-title" style="margin: 0;">Add New Patient</h1>
+  </div>
+
+  <div class="card" style="max-width: 600px;">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div style="margin-bottom: 16px;">
+        <label style="display: block; font-size: 14px; margin-bottom: 6px;">First Name</label>
+        <input
+          type="text"
+          formControlName="firstName"
+          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;"
+        />
+        <small *ngIf="f['firstName'].invalid && f['firstName'].touched" style="color: #991b1b;">First name is required</small>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label style="display: block; font-size: 14px; margin-bottom: 6px;">Last Name</label>
+        <input
+          type="text"
+          formControlName="lastName"
+          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;"
+        />
+        <small *ngIf="f['lastName'].invalid && f['lastName'].touched" style="color: #991b1b;">Last name is required</small>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label style="display: block; font-size: 14px; margin-bottom: 6px;">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;"
+        />
+        <small *ngIf="f['email'].invalid && f['email'].touched" style="color: #991b1b;">Please enter a valid email</small>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label style="display: block; font-size: 14px; margin-bottom: 6px;">Date of Birth</label>
+        <input
+          type="date"
+          formControlName="dateOfBirth"
+          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;"
+        />
+        <small *ngIf="f['dateOfBirth'].invalid && f['dateOfBirth'].touched" style="color: #991b1b;">Please enter a valid date of birth</small>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <label style="display: block; font-size: 14px; margin-bottom: 6px;">Status</label>
+        <select
+          formControlName="status"
+          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;"
+        >
+          <option value="active">Active</option>
+          <option value="pending">Pending</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 12px;">
+        <button type="submit" class="btn-primary" [disabled]="loading()">
+          {{ loading() ? 'Saving...' : 'Add Patient' }}
+        </button>
+        <button type="button" (click)="goBack()" style="padding: 10px 20px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer; font-size: 14px;">
+          Cancel
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
