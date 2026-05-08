@@ -26,8 +26,8 @@ https://www.youtube.com/watch?v=KYDt0y2-zTM
 
 Create a `.env` file inside the `backend` folder and paste this exactly:
 
-    MONGODB_URI=your_mongodb_connection_string_here
-PORT=3000
+    MONGODB_URI=your_mongodb_connection_string_here 
+    PORT=3000
 
 
 Start the backend:
