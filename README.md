@@ -2,6 +2,10 @@
 
 A full-stack web app I built for managing patient records. It lets staff view, add, and manage patients with a live dashboard showing stats and charts.
 
+## Demo Video
+
+https://www.youtube.com/watch?v=KYDt0y2-zTM
+
 ## Tech Stack
 
 - **Frontend:** Angular 21, PrimeNG, Chart.js
